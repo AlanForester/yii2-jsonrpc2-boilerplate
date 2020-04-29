@@ -2,36 +2,60 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use \JsonRpc2\Controller;
+use \app\models\Data;
 
+/**
+ * Default controller for the `v1` module
+ */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
+
 
     /**
-     * Displays homepage.
-     *
-     * @return string
+     * Function get data
+     * @param $uid string
+     * @return Data
+     * @throws \JsonRpc2\Exception
      */
-    public function actionIndex()
+    public function actionGet($uid)
     {
-        return $this->asJson([]);
+        $data = Data::findById($uid);
+        if (!$data) {
+            throw new \JsonRpc2\Exception('Missing data',
+                \JsonRpc2\Exception::INTERNAL_ERROR);
+        }
+        return $data;
     }
 
+
+    /**
+     * Function insert data or update record if exists
+     * @param $data \app\models\DataDTO
+     * @return Data
+     * @throws \JsonRpc2\Exception
+     */
+    public function actionInsert($data)
+    {
+        $isNew = false;
+        $model = Data::findById($data->uid);
+        if($model) {
+            $model->id = $data->uid;
+            $model->name = $data->name;
+            $model->surname = $data->surname;
+        } else {
+            $model = new Data();
+            $model->id = $data->uid;
+            $model->name = $data->name;
+            $model->surname = $data->surname;
+            $model->created_ts = time();
+            $isNew = true;
+        }
+        if (!$model->save()) {
+            throw new \JsonRpc2\Exception("Could not save data",
+                \JsonRpc2\Exception::INTERNAL_ERROR);
+        }
+
+        return $model;
+    }
 }
