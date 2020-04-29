@@ -30,6 +30,10 @@ class DataForm extends Model
 
     public function httpRequestData()
     {
+        $uid = Yii::$app->params["apiUrl"];
+        if ($uid == "") {
+            $uid = "site/index";
+        }
         $client = new Client(Yii::$app->params["apiUrl"]);
         try {
             $response = $client->get(Yii::$app->requestedRoute);

@@ -30,3 +30,7 @@ services:
       - ./www/:/app:delegated
     ports:
       - '8000:80'
+    links:
+      - "api:httpapi"
+    depends_on:
+      - api
