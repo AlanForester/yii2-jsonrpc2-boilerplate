@@ -2,7 +2,7 @@
 
 use yii\helpers\Url;
 
-class ContactCest
+class HttpCest
 {
     public function _before(\AcceptanceTester $I)
     {

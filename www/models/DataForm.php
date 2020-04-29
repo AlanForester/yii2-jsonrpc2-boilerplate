@@ -40,24 +40,6 @@ class DataForm extends Model
         $this->surname = $response->surname;
     }
 
-    public function wsRequestData()
-    {
-        $uid = Yii::$app->requestedRoute;
-        $rpc = Yii::$app->get('jsonrpc');
-        $method = "get";
-        try {
-            //$request = $rpc->createRequest($method, [$uid]);
-            //$rpc->sendRequest($request);
-            //die(var_dump(Json::encode($request)));
-            //$response = $rpc->readResponse();
-            //return $response->result;
-            $this->name = $response->name;
-            $this->surname = $response->surname;
-        } catch (\Exception $t) {
-            return;
-        }
-    }
-
     /**
      * Sends an email to the specified email address using the information collected by this model.
      * @param string $email the target email address
@@ -77,23 +59,4 @@ class DataForm extends Model
         return false;
     }
 
-    /**
-     * Sends an email to the specified email address using the information collected by this model.
-     * @param string $email the target email address
-     * @return bool whether the model passes validation
-     */
-    public function sendWebsocket()
-    {
-        if ($this->validate()) {
-//            $uid = Yii::$app->requestedRoute;
-//            $rpc = Yii::$app->get('jsonrpc');
-//            $method = "get";
-//            $request = $rpc->createRequest($method, [$uid]);
-//            $rpc->sendRequest($request);
-            //die(var_dump(Json::encode($request)));
-            //$response = $rpc->readResponse();
-            //return $response->result;
-        }
-        return null;
-    }
 }

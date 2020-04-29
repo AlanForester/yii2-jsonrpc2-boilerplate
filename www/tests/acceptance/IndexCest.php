@@ -2,7 +2,7 @@
 
 use yii\helpers\Url;
 
-class HomeCest
+class IndexCest
 {
     public function ensureThatHomePageWorks(AcceptanceTester $I)
     {

@@ -56,11 +56,6 @@ $config = [
             'rules' => [
             ],
         ],
-        'jsonrpc' => [
-            'class' => raoptimus\jsonrpc2\Connection::class,
-            'hostname' => 'roman-api.cd',
-            'port' => 80,
-        ],
     ],
     'params' => $params,
 ];

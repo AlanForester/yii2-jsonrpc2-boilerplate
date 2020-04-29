@@ -40,7 +40,6 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'HTTP', 'url' => ['/site/http']],
-            ['label' => 'WS', 'url' => ['/site/ws']],
         ],
     ]);
     NavBar::end();

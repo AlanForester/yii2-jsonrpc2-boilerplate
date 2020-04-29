@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=10.0.1.100;dbname=roman_s',
-    'username' => 'postgres',
-    'password' => '',
+    'dsn' => 'pgsql:host=database;dbname=jsonrpc2',
+    'username' => 'jsonrpc2',
+    'password' => 'jsonrpc2',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
