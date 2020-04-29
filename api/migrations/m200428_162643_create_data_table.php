@@ -13,13 +13,14 @@ class m200428_162643_create_data_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%data}}', [
-            'id' => $this->string(32)->notNull(), // MD5
+            'id' => $this->primaryKey(),
             'name' => $this->string(255),
             'surname' => $this->string(255),
-            'created_ts' => $this->integer()->notNull(),
+            'page_uid' => $this->string(255)->notNull(), // MD5
+            'created' => $this->integer()->notNull(),
         ]);
 
-        $this->addPrimaryKey('page_id_pk','{{%data}}','id');
+        $this->createIndex('page_uid_pk','{{%data}}','id');
     }
 
     /**

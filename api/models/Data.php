@@ -3,16 +3,15 @@
 namespace app\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "data".
  *
- * @property string $id
+ * @property int $id
  * @property string|null $name
  * @property string|null $surname
- * @property int $created_ts
+ * @property string $page_uid
+ * @property int $created
  */
 class Data extends \yii\db\ActiveRecord
 {
@@ -30,12 +29,10 @@ class Data extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id','created_ts'], 'required'],
-            [['created_ts'], 'default', 'value' => null],
-            [['created_ts'], 'integer'],
-            [['id'], 'string', 'max' => 32],
-            [['name', 'surname'], 'string', 'max' => 255],
-            [['id'], 'unique'],
+            [['page_uid'], 'required'],
+            [['created'], 'default', 'value' => null],
+            [['created'], 'integer'],
+            [['name', 'surname', 'page_uid'], 'string', 'max' => 255],
         ];
     }
 
@@ -48,13 +45,14 @@ class Data extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'surname' => 'Surname',
-            'created_ts' => 'Created Ts',
+            'page_uid' => 'Page Uid',
+            'created' => 'Created',
         ];
     }
 
-    public static function findById($id)
+    public static function findByPageUid($uid)
     {
-        return Data::findOne(['id' => $id]);
+        return Data::findOne(['page_uid' => $uid]);
     }
 
     /**

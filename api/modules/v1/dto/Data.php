@@ -5,7 +5,7 @@ namespace app\modules\v1\dto;
 
 use \JsonRpc2\Dto;
 
-class DataDTO extends Dto
+class Data extends Dto
 {
     /**
      * @var string

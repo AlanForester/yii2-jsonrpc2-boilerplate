@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * This is the ActiveQuery class for [[Data]].
  *
- * @see DataDTO
+ * @see Data
  */
 class DataQuery extends \yii\db\ActiveQuery
 {

@@ -4,21 +4,24 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'api',
+    'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'modules' => [
-        'v1' => [
-            'class' => 'app\modules\v1\Module'
-        ]
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'MTe4mOUQfGMXKHJT7oFEfZp9udn51iT2',
+            'cookieValidationKey' => 'ZZTLOfxUwr32xMu-jX1_rKhOAnaYNn-e',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'user' => [
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -35,7 +38,14 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'categories' => ['my_category'],
+                    'exportInterval' => 1,
+                    'logFile' => '@app/runtime/logs/my.log',
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info','error', 'warning'],
+                    'logFile' => '@app/runtime/logs/app.log',
                 ],
             ],
         ],
@@ -43,10 +53,13 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'rules' => [
+            ],
         ],
-        'response' => [
-            'format' => yii\web\Response::FORMAT_JSON,
-            'charset' => 'UTF-8',
+        'jsonrpc' => [
+            'class' => raoptimus\jsonrpc2\Connection::class,
+            'hostname' => 'roman-api.cd',
+            'port' => 80,
         ],
     ],
     'params' => $params,
@@ -58,14 +71,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1','10.0.1.*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '::1', '10.0.1.*'],
+        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 

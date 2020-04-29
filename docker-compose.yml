@@ -1,0 +1,26 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11-alpine
+    command: -c shared_preload_libraries='pg_stat_statements' -c pg_stat_statements.max=10000 -c pg_stat_statements.track=all
+    environment:
+      - TZ=UTC
+      - POSTGRES_DB=jsonrpc2
+      - POSTGRES_USER=jsonrpc2
+      - POSTGRES_PASSWORD=jsonrpc2
+    ports:
+      - 5432:5432
+  api:
+    image: yiisoftware/yii2-php:7.1-apache
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./api/:/api:delegated
+    ports:
+      - '8000:81'
+  www:
+    image: yiisoftware/yii2-php:7.1-apache
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./www/:/www:delegated
+    ports:
+      - '8000:80'
