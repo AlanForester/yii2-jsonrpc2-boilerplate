@@ -21,6 +21,8 @@ services:
       - '8001:80'
     links:
       - "postgres:database"
+    depends_on:
+      - postgres
   www:
     image: yiisoftware/yii2-php:7.1-apache
     volumes:
