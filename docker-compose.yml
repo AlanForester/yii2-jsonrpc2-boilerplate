@@ -30,5 +30,3 @@ services:
       - ./www/:/app:delegated
     ports:
       - '8000:80'
-    links:
-      - "api:http-api"
