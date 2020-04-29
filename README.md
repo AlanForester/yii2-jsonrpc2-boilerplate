@@ -3,15 +3,13 @@
 
 INSTALLATION
 ------------
-### Install API requirements
+### Install lib requirements
 ~~~
-cd api
-composer install
+make install
 ~~~
-### Install WWW requirements
+### Clean deps and caches
 ~~~
-cd www
-composer install
+make clean
 ~~~
 
 Using libraries
