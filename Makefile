@@ -22,3 +22,6 @@ up:
 
 down:
 	docker-compose down --volumes --remove-orphans
+
+test:
+	cd www && vendor/bin/codecept run

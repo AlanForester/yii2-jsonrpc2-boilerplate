@@ -12,6 +12,11 @@ make install
 make clean
 ~~~
 
+### Run tests
+~~~
+make test
+~~~
+
 Using libraries
 -------------------
 
